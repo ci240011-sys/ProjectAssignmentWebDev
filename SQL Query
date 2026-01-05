@@ -1,0 +1,23 @@
+-- Run this in phpMyAdmin first
+CREATE DATABASE IF NOT EXISTS report_system;
+USE report_system;
+
+CREATE TABLE reports (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    report_no VARCHAR(20) NOT NULL UNIQUE,
+    report_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    description TEXT,
+    file_path VARCHAR(255),
+    approval_status ENUM('Pending', 'Approved', 'Rejected', 'In Progress') DEFAULT 'Pending',
+    report_status ENUM('Draft', 'Pending Review', 'Complies') DEFAULT 'Draft',
+    admin_notes TEXT,
+    created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+);
+
+-- Insert some sample data for testing
+INSERT INTO reports (report_no, description, approval_status, report_status) VALUES
+('C1173', 'Lorem Ipsum Report 1', 'Approved', 'Complies'),
+('C1240', 'Report for Project Alpha', 'Rejected', 'Draft'),
+('C1386', 'Monthly Analysis Report', 'In Progress', 'Pending Review'),
+('C1450', 'Financial Q1 Report', 'Pending', 'Draft'),
+('C1520', 'Security Audit Report', 'Approved', 'Complies');
